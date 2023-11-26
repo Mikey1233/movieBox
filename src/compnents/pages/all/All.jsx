@@ -54,7 +54,7 @@ function All() {
 export default All
 
 ////////////loader func
-export const loaderData = async ()=>{
+// export const loaderData = async ()=>{
  
   
-}
+// }

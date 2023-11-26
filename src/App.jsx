@@ -11,7 +11,7 @@ import Account from './compnents/pages/account/Account'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<RootLayouts/>}>
-      <Route index loader={loaderData} element={<All/>}/>
+      <Route index  element={<All/>}/>
       <Route path='/movies' element={<Movies/>}/>
       <Route path='/tv-series' element={<Tvseries/>}/>
       <Route path='/book-marks' element={<Bookmarks/>}/>
