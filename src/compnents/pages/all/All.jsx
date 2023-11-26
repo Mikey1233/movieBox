@@ -3,8 +3,8 @@ import './All.css'
 import MovieBox from '../../movieBox/MovieBox'
 import { useLoaderData } from 'react-router-dom'
 function All() {
-  const data = useLoaderData()
-  console.log(data)
+  // const data = useLoaderData()
+  // console.log(data)
   return (
     <div className='movieBox-all'>
       <div className='movieBox-all-input'>
