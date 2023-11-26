@@ -1,0 +1,12 @@
+.movieBox{
+    display:grid;
+    place-items: center;
+    transition: all 0.4s;
+}
+.movieBox h1{
+    color: #000;
+}
+.movieBox:hover{
+    background-color: rgb(220, 41, 71);
+    cursor: pointer;
+}
