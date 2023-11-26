@@ -5,6 +5,7 @@
 }
 .movieBox h1{
     color: #000;
+    font-family: 'Poppins', sans-serif;
 }
 .movieBox:hover{
     background-color: rgb(220, 41, 71);

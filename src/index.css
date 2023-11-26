@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 :root{
   --secondaryBg: rgb(53 52 52 / 39%)
 }
@@ -6,6 +7,7 @@
   padding: 0;
   /* overflow: scroll; */
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 body{
   background-color: #000;
