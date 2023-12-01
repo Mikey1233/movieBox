@@ -49,3 +49,6 @@ nav ul{
     gap: 1.5rem;
     align-content: center;
 }
+a.active svg{
+    color: red;
+}

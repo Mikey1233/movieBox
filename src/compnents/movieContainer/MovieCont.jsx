@@ -1,6 +1,5 @@
 import React from "react";
-import "./MovieBox.css";
-
+import "./MovieCont.css";
 const movieSvg = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -38,15 +37,16 @@ const Bookmarks = (
     />
   </svg>
 );
-function MovieBox({ year, title, type, image }) {
+function MovieCont({ year, title, type, image }) {
   return (
-    <div className="movieBox">
+    <div className="movieCont">
       <div className="book-mark">{Bookmarks}</div>
+      {/* <FontAwesomeIcon icon="fa-thin fa-bookmark" style={{color: "#000000",}} /> */}
       <img src={`https://image.tmdb.org/t/p/w500/${image}`} alt="pic" />
-      <div className="movieBox-content_container">
-        <div className="movieBox-content">
+      <div className="movieCont-content">
+        <div className="movieCont-content_details">
           <span>{year}</span>
-          <span className="dot">.</span>
+          <span>.</span>
           {type === "movie" ? (
             <span>
               {movieSvg}
@@ -65,4 +65,4 @@ function MovieBox({ year, title, type, image }) {
   );
 }
 
-export default MovieBox;
+export default MovieCont;
