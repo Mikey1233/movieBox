@@ -56,7 +56,7 @@ function All() {
                 arr.release_date?.slice(0, 4) || arr.first_air_date.slice(0, 4)
               }
               type={arr.media_type}
-              image={`https://image.tmdb.org/t/p/w500/${arr.poster_path}`}
+              image={arr.poster_path}
             />
           ))}
         </Slider>
@@ -71,7 +71,7 @@ function All() {
                   arr.first_air_date.slice(0, 4)
                 }
                 type={"movie"}
-                image={`https://image.tmdb.org/t/p/w500/${arr.poster_path}`}
+                image={arr.poster_path}
               />
             ))}
           </div>
