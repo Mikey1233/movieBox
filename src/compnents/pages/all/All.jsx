@@ -3,7 +3,7 @@ import { useRef } from "react";
 import "./All.css";
 import MovieBox from "../../movieBox/MovieBox";
 import MovieCont from "../../movieContainer/MovieCont";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -34,7 +34,6 @@ function All() {
   const recommend = data[1].results;
   const popular = data[2].results;
   const upcoming = data[3].results;
-
   return (
     <div className="movieBox-all">
       <div className="movieBox-all-input">
@@ -50,7 +49,8 @@ function All() {
           className="movieBox-all__trending"
         >
           {trending.map((arr) => (
-            <MovieBox
+            <Link to={`${arr.id}`} key={arr.id}>
+               <MovieBox
               title={arr.title || arr.name}
               year={
                 arr.release_date?.slice(0, 4) || arr.first_air_date.slice(0, 4)
@@ -58,21 +58,26 @@ function All() {
               type={arr.media_type}
               image={arr.poster_path}
             />
+            </Link>
+           
           ))}
         </Slider>
         <div className="movieBox-all-recommend">
           <h2>Recommended for you</h2>
           <div className="movieBox-all-recommend__contents">
             {recommend.map((arr) => (
-              <MovieCont
+            <Link to={`${arr.id}`} key={arr.id}>
+               <MovieCont
                 title={arr.title || arr.name}
                 year={
                   arr.release_date?.slice(0, 4) ||
                   arr.first_air_date.slice(0, 4)
                 }
+                
                 type={"movie"}
                 image={arr.poster_path}
               />
+            </Link> 
             ))}
           </div>
         </div>
@@ -80,7 +85,8 @@ function All() {
           <h2>Top Rated</h2>
           <div className="movieBox-all-recommend__contents">
             {popular.map((arr) => (
-              <MovieCont
+              <Link to={`${arr.id}`} key={arr.id}>
+                  <MovieCont
                 title={arr.title || arr.name}
                 year={
                   arr.release_date?.slice(0, 4) ||
@@ -89,6 +95,8 @@ function All() {
                 type={"movie"}
                 image={`https://image.tmdb.org/t/p/w500/${arr.poster_path}`}
               />
+              </Link>
+            
             ))}
           </div>
         </div>
@@ -96,16 +104,19 @@ function All() {
           <h2>Upcoming</h2>
           <div className="movieBox-all-recommend__contents">
             {upcoming.map((arr) => (
-              <MovieCont
-                title={arr.title || arr.name}
-                year={
-                  arr.release_date?.slice(0, 4) ||
-                  arr.first_air_date.slice(0, 4)
-                }
-                type={"movie"}
-                image={`https://image.tmdb.org/t/p/w500/${arr.poster_path}`}
-              />
-            ))}
+              <Link to={`${arr.id}`} key={arr.id}>
+                 <MovieCont
+              title={arr.title || arr.name}
+              year={
+                arr.release_date?.slice(0, 4) ||
+                arr.first_air_date.slice(0, 4)
+              }
+              type={"movie"}
+              image={`https://image.tmdb.org/t/p/w500/${arr.poster_path}`}
+            />
+              </Link>
+             
+          ))}
           </div>
         </div>
       </div>

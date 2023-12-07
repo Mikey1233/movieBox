@@ -1,0 +1,47 @@
+.tv-det{
+    display: flex;
+    height: fit-content;
+    padding: 0.1rem 1rem ;
+    gap: 1rem;
+}
+.color-text{
+    color: red;
+}
+.tv-det-img {
+    width: 50vw;
+}
+.tv-det-img img{
+    width: 100%;
+}
+.tv-det-content {
+    display: flex;
+    width: 50vw;
+    flex-direction: column;
+    justify-content: center;
+    /* text-wrap: nowrap; */
+}
+.tv-details-content h1{
+    margin-bottom: 2rem;
+}
+.tv-det-content p{
+    margin-bottom: 2rem;
+}
+.btn{
+    max-width: 300px;
+    text-align: center;
+    margin-right: 2rem;
+    justify-content: center;
+    padding: 15px 35px;
+    border-radius: 50px;
+    outline: none;
+    border: 0;
+    font-weight:bold;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    background-color: red;
+    transition: all .4s;
+}
+.btn:hover{
+    transform: scale(1.1);
+}
