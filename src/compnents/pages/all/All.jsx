@@ -34,7 +34,7 @@ function All() {
   const recommend = data[1].results;
   const popular = data[2].results;
   const upcoming = data[3].results;
-  console.log(popular);
+
   return (
     <div className="movieBox-all">
       <div className="movieBox-all-input">
@@ -116,41 +116,27 @@ function All() {
 export default All;
 //api key//78393d09e7d06dc8a1d807120b3c221e
 ////////////loader func
+const fetchApiData = async (url, opt) => {
+  const response = await fetch(url, opt);
+  const data = await response.json();
+  return data;
+};
 export const loaderData = async () => {
   const options = {
     method: "GET",
   };
-
-  const data = await fetch(
-    "https://api.themoviedb.org/3/trending/all/day?api_key=78393d09e7d06dc8a1d807120b3c221e",
-    options
-  );
-
-  const data2 = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=78393d09e7d06dc8a1d807120b3c221e`,
-    options
-  );
-
-  const data3 = await fetch(
-    "https://api.themoviedb.org/3/movie/top_rated?api_key=78393d09e7d06dc8a1d807120b3c221e",
-    options
-  );
-  const data4 = await fetch(
-    "https://api.themoviedb.org/3/movie/upcoming?api_key=78393d09e7d06dc8a1d807120b3c221e",
-    options
-  );
-  // fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
-  let res = await data.json();
-  let res2 = await data2.json();
-  let res3 = await data3.json();
-  let res4 = await data4.json();
-
-  if (!data.ok || !data2.ok || !data3.ok || !data4.ok) {
-    throw Error("Could not find that career.");
+  const dataArr = {
+    0: "https://api.themoviedb.org/3/trending/all/day?api_key=78393d09e7d06dc8a1d807120b3c221e",
+    1: `https://api.themoviedb.org/3/discover/movie?api_key=78393d09e7d06dc8a1d807120b3c221e`,
+    2: "https://api.themoviedb.org/3/movie/top_rated?api_key=78393d09e7d06dc8a1d807120b3c221e",
+    3: "https://api.themoviedb.org/3/movie/upcoming?api_key=78393d09e7d06dc8a1d807120b3c221e",
+  };
+  const response = [];
+  for (let i = 0; i < 4; i++) {
+    response.push(fetchApiData(dataArr[i], options));
   }
-  return [res, res2, res3,res4]
+  const data = await Promise.all(response);
+
+  return data;
 };
 
-/////////////popula
-
-/////////////////////

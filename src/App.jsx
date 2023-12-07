@@ -3,11 +3,12 @@ import './App.css'
 import RootLayouts from './compnents/layouts/RootLayouts'
 import { createBrowserRouter,createRoutesFromElements,Route,RouterProvider } from 'react-router-dom'
 //pages
-import All, { loaderData } from './compnents/pages/all/All'
+import All from './compnents/pages/all/All'
 import Tvseries from './compnents/pages/tvSeries/Tvseries'
 import Movies from './compnents/pages/movies/Movies'
 import Bookmarks from './compnents/pages/bookmarks/Bookmarks'
 import Account from './compnents/pages/account/Account'
+import { loaderData } from './compnents/pages/all/All'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<RootLayouts/>}>
