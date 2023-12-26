@@ -3,7 +3,7 @@ import React from 'react'
 function Bookmarks() {
   return (
     <div>
-      <h1>BookMarks</h1>
+      <h1>your bookmarks</h1>
     </div>
   )
 }

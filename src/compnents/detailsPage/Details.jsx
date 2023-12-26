@@ -5,7 +5,8 @@ import "./Details.css";
 function Details() {
   const { id } = useParams();
 
-  const [movieDetails, setMovieDetails] = useState({});
+  const [movieDetails, setMovieDetails] = useState([]);
+  const [img, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,10 +16,12 @@ function Details() {
         const response = await fetch(
           `https://api.themoviedb.org/3/movie/${id}?api_key=${"78393d09e7d06dc8a1d807120b3c221e"}`
         );
-      //  const response = await fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${"78393d09e7d06dc8a1d807120b3c221e"}`)
+        //  const response = await fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${"78393d09e7d06dc8a1d807120b3c221e"}`)
         const data = await response.json();
         setMovieDetails(data);
         setLoading(false);
+        setImage(movieDetails.poster_path);
+        console.log(data)
       } catch (error) {
         console.error(error);
         setLoading(false);
@@ -34,40 +37,50 @@ function Details() {
 
   return (
     <div className="movie-details">
-      <div className="movie-details-img">
+       <div
+        className="movie-details-img"
+        // style={{background: true ?`url(https://image.tmdb.org/t/p/w500${movieDetails.poster_path})`:''}}
+      >
+        <div>
         <img
           src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
           alt={movieDetails.title}
         />
-      </div>
-
-      <div className="movie-details-content">
-        <h1>{movieDetails.title}</h1>
-        <p>
-          <span className="color-text">About : </span> <br />
-          {movieDetails.overview}
-        </p>
-        <p>
-          <span className="color-text">Release date : </span>{" "}
-          {movieDetails.release_date}
-        </p>
-        <p>
-          <span className="color-text">Genres : </span>{" "}
-          {movieDetails.genres.map((genre) => genre.name).join(", ")}
-        </p>
-        <div>
-          <Link to={-1}>
-            <button type="button" className="btn home">
-              Back
-            </button>
-          </Link>
-          <button type="button" className="btn home">
-            Add to Bookmarks
-          </button>
         </div>
+        
+       
       </div>
+      
+      <div className="movie-details-content">
+<h1>{movieDetails.title}</h1>
+<p>
+  <span className="color-text">About : </span> <br /> 
+  {movieDetails.overview}
+</p>
+<p>
+  <span className="color-text">Release date : </span>{" "}
+  {movieDetails.release_date}
+</p>
+<p>
+  <span className="color-text">Genres : </span>{" "}
+  {/* {movieDetails.genres.length > 1 && movieDetails.genres.map((genre) => genre.name).join(", ")} */}
+</p>
+<div>
+  <Link to={-1}>
+    <button type="button" className="btn home">
+      Back
+    </button>
+  </Link>
+  <button type="button" className="btn home">
+    Add to Bookmarks
+  </button>
+</div>
+</div>  
+
+     
     </div>
   );
 }
 
 export default Details;
+

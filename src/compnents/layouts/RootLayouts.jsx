@@ -1,9 +1,11 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import img from "../../assets/image-avatar.png";
+import img from "../../assets/image-avatar.svg";
 import "./RootLayouts.css";
 import logo from "../../assets/monero.svg";
-function RootLayouts() {
+import { auth } from "../../config/firebaseConfig";
+function RootLayouts({profile}) {
+  const acctPic = auth?.currentUser?.photoURL
   return (
     <div className="root-layouts">
       <nav>
@@ -61,9 +63,7 @@ function RootLayouts() {
           </NavLink>
         </ul>
         <div>
-          <NavLink to={"account"}>
-            <img src={img} alt="avatar" className="avatar" />
-          </NavLink>
+          <img src={profile ? acctPic:img} alt="avatar" className="avatar" />
         </div>
       </nav>
 

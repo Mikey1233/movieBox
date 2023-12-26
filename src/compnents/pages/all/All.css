@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap');
 .movieBox-all {
   display: flex;
   flex-direction: column;
@@ -5,6 +6,56 @@
 }
 .movieBox-all-input {
   padding: 10px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+ position: relative;
+}
+.movieBox-all-input div button {
+  color: red;
+  background-color: white;
+  margin-right: 20px;
+  border: 0;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-weight: 500;
+  margin-top: 4px;
+  border-radius: 5px;
+  width: fit-content;
+  position: relative;
+  z-index: 1000;
+}
+.movieBox-intro {
+  height: 100vh;
+  background-image: url("../../../assets/spider-man.jpg");
+  background-size: cover;
+  position: relative;
+  /* opacity: 0.6; */
+}
+.gradient {
+  width: 100%;
+  /* background-color: black; */
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* opacity: 0.6; */
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  background: rgb(0 0 0 / 58%);
+}
+.svg {
+  width: 1.2rem;
+  position: relative;
+  top: 4px;
 }
 .bi-search {
   font-weight: bold;
@@ -20,11 +71,31 @@
   outline: none;
   background-color: #000;
   border: 0;
-  color: #504d4d;
+  color: white;
   border-radius: 35px;
 }
+.intro-text {
+  height: 100%;
+  text-align: center;
+  margin-top: 6rem;
+  z-index: 1000;
+  position: relative;
+}
+.intro-text h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  font-family: 'inter',sans-serif;
+}
+.intro-text button{
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 10px;
+ margin-top: 10px;
+ cursor: pointer;
+  font-size: 22px;
+}
 .movieBox-all-input input:focus {
-  background-color: var(--secondaryBg);
+  background-color: black;
 }
 .movieBox-all-content {
   padding: 20px 10px 10px 10px;

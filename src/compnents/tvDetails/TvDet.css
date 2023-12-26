@@ -27,11 +27,10 @@
     margin-bottom: 2rem;
 }
 .btn{
-    max-width: 300px;
     text-align: center;
-    margin-right: 2rem;
+    margin-right: 1.2rem;
     justify-content: center;
-    padding: 15px 35px;
+    padding: 10px 15px ;
     border-radius: 50px;
     outline: none;
     border: 0;

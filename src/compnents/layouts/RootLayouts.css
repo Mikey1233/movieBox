@@ -1,12 +1,11 @@
 .root-layouts{
    display: grid;
    grid-template-columns: 70px 1fr;
-    margin: 1rem;
-    /* overflow: hidden; */
-
+   
+ 
     height: fit-content;
-    gap: 10px;
-    gap: 20px;
+    /* gap: 2px; */
+    /* gap: 20px; */
     position: relative;
 }
 .root-layouts main{
@@ -25,6 +24,8 @@
      position: fixed;
      width:fit-content;
      padding: 0.8rem;
+     margin-left: 5px;
+     margin-top: 10px;
      display: flex;
      flex-direction: column;
      justify-content: space-between;
@@ -42,6 +43,7 @@
 }
 .avatar{
     width: 2rem;
+    border-radius: 50%;
 }
 nav ul{
     display: flex;
