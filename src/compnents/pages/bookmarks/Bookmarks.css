@@ -1,0 +1,9 @@
+.bookmark{
+    padding-top: 1rem;
+}
+.bookmark-set{
+    margin-top: 2rem;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}

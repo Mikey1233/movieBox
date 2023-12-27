@@ -21,16 +21,17 @@ import { useState } from "react";
 
 
 function App() {
-const [profile,setprofile] = useState(false)
+const [bookmark,setBookmark] = useState(false);
+
   
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<RootLayouts profile={profile}/>}>
-        <Route index loader={loaderData} element={<All setProfile={setprofile} profile={profile}/>} />
-        <Route path=":id" element={<Details />} />
+      <Route path="/" element={<RootLayouts/>}>
+        <Route index loader={loaderData} element={<All/>} />
+        <Route path=":id" element={<Details bookmark={bookmark} setBookmark={setBookmark}/>} />
         <Route path="movies" element={<MovieLay />}>
           <Route index element={<Movies />} />
-          <Route path=":id" element={<Details />} />
+          <Route path=":id" element={<Details bookmark={bookmark} setBookmark={bookmark} />} />
         </Route>
         <Route path="/tv-series" element={<TvLayout />}>
           <Route index element={<Tvseries/>}/>
