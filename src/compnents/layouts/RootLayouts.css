@@ -32,18 +32,12 @@
      height: 95vh;
      align-items: center;
 }
-/* .root-layouts__img{
-    background-color: white;
-    width: fit-content;
-    padding: 10px 12px;
-    border-radius: 46%;
-} */
+
 .root-layouts__img img{
     width: 2rem;
 }
 .avatar{
     width: 2rem;
-    border-radius: 50%;
 }
 nav ul{
     display: flex;

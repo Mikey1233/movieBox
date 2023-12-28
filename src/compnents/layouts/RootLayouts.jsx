@@ -1,12 +1,12 @@
-import { useState,useEffect } from "react";
+import { useState} from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import "./RootLayouts.css";
 import logo from "../../assets/monero.svg";
-import { auth } from "../../config/firebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
+// import { auth } from "../../config/firebaseConfig";
+// import { onAuthStateChanged } from "firebase/auth";
 import { checkingAuthUser } from "../../checkForUserAuth";
 function RootLayouts() {
-  const [userPic,setUserpic] = useState('')
+  const [userPic,setUserpic] = useState('')/////////state to manage the profile pic
   checkingAuthUser(userPic,setUserpic)
 
   return (
@@ -65,7 +65,7 @@ function RootLayouts() {
             </svg>
           </NavLink>
         </ul>
-        <div>
+        <div className="pic-cont">
           <img src={userPic} alt="avatar" className="avatar" />
         </div>
       </nav>

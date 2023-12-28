@@ -2,25 +2,23 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./Details.css";
-import checked from "../../assets/checked.svg";
 //////firebase
 import { db, auth } from "../../config/firebaseConfig";
 import {
   collection,
-  addDoc,
   deleteDoc,
-  query,
-  where,
   doc,
-  getDocs,
 } from "firebase/firestore";
-import { fetchfunc } from "./fetchfunc";
+import { fetchfunc ,checkUserData} from "./fetchfunc";
+/////////popup animation component
+import Popup from '../popup/Popup';
 
 function Details({ bookmark, setBookmark }) {
+  //////took the state as parameters from app.js to manage the popup animation when movie is bookmarked
 // const moviesRef = collection(db, "moviesBookmarked");
 
   const moviesRef = collection(db, "moviesBookmarked");
-  const userIdToFetch = auth?.currentUser?.uid;
+  // const userIdToFetch = auth?.currentUser?.uid;
 
   const { id } = useParams();
   ///all states
@@ -48,42 +46,45 @@ function Details({ bookmark, setBookmark }) {
       }
     };
     fetchMovieDetails();
-    fetchfunc();
+    fetchfunc(id,setBookmarkData,setIsbookmarked);
   }, [id]);
 
   if (loading) {
     return <p>Loading...</p>;
   }
 
-  const addBookmark = async () => {
-    try {
-      await addDoc(moviesRef, {
-        image_path: movieDetails.poster_path,
-        release_date: movieDetails.release_date,
-        title: movieDetails.title,
-        type: "movie",
-        userId: auth?.currentUser?.uid,
-        movieId: id,
-      });
-      setBookmark(true);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
+
+//////////////add movies to bookmarks
+  // const addBookmark = async () => {
+  //   try {
+  //     await addDoc(moviesRef, {
+  //       image_path: movieDetails.poster_path,
+  //       release_date: movieDetails.release_date,
+  //       title: movieDetails.title,
+  //       type: "movie",
+  //       userId: auth?.currentUser?.uid,
+  //       movieId: id,
+  //     });
+  //     setBookmark(true);
+  //     setIsbookmarked(true)
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   
+  ///////////remove movie from bookmark
   const removeItemFromBookmark = async (code) => {
     await deleteDoc(doc(db, "moviesBookmarked", code));
-    console.log("deleted", code);
+      const rexs = await doc(db, "moviesBookmarked", code)
+      
+    setIsbookmarked(false)
   };
   return (
     <div className="movie-details">
-      <div className={bookmark ? "success" : "success hide"}>
-        <img src={checked} alt="checknox" />
-        added to bookmarks
-      </div>
+    <Popup message={'added successfully'} bookmark={bookmark} setBookmark={setBookmark}/>
       <div
         className="movie-details-img"
-        // style={{background: true ?`url(https://image.tmdb.org/t/p/w500${movieDetails.poster_path})`:''}}
       >
         <div>
           <img
@@ -122,7 +123,7 @@ function Details({ bookmark, setBookmark }) {
               remove from Bookmarks
             </button>
           ) : (
-            <button type="button" className="btn home" onClick={addBookmark}>
+            <button type="button" className="btn home" onClick={()=> checkUserData(id,setBookmark,setIsbookmarked,movieDetails)}>
               Add to Bookmarks
             </button>
           )}
