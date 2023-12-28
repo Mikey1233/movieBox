@@ -80,7 +80,7 @@ const signUserOut = async()=>{
       <div className="movieBox-intro">
         <div className="movieBox-all-input">
           <div>
-            <input type="text" placeholder="Search for movie or Tv-series" />
+            <input type="text" placeholder="Search for movie or Tv-series" ></input>
             {search}
           </div>
           <div>

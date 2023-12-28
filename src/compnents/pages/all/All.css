@@ -132,3 +132,46 @@
 .ff {
   display: flex;
 }
+@media screen and (max-width:700px){
+  .movieBox-all-recommend__contents{
+    justify-content: center;
+  }
+  .movieBox-all-input {
+    padding: 5px;
+    align-content: center;
+    align-items: unset;
+    z-index: 1000;
+  }
+  .movieBox-all-input div{
+    position: relative;
+  }
+  .movieBox-all-input div button {
+    margin-top: unset;
+  }
+  .movieBox-all-input input {
+    padding: 7px 12px;
+    min-width: unset;
+    width: 100%;
+    outline: none;
+    background-color: #000;
+    border: 0;
+    color: white;
+    border-radius: 35px;
+  }
+  .bi-search {
+    position: relative;
+    left: -10px;
+    cursor: pointer;
+    top: 5px;
+  }
+  
+  .movieBox-all-input input {
+    padding: 15px;
+    min-width: 320px;
+    outline: none;
+    background-color: #000;
+    border: 0;
+    color: white;
+    border-radius: 35px;
+  }
+}

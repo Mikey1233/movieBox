@@ -22,12 +22,13 @@ import { useState } from "react";
 
 function App() {
 const [bookmark,setBookmark] = useState(false);
+const [isActive, setIsActive] = useState(false);
 
   
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayouts/>}>
-        <Route index loader={loaderData} element={<All/>} />
+        <Route index loader={loaderData} element={<All isActive={isActive} setIsActive={setIsActive}/>} />
         <Route path=":id" element={<Details bookmark={bookmark} setBookmark={setBookmark}/>} />
         <Route path="movies" element={<MovieLay />}>
           <Route index element={<Movies />} />
@@ -37,7 +38,7 @@ const [bookmark,setBookmark] = useState(false);
           <Route index element={<Tvseries/>}/>
             <Route path=":id" element={<TvDet/>}/>
         </Route>
-        <Route path="book-marks" element={<Bookmarks/>}/>
+        <Route path="book-marks" element={<Bookmarks isActive={isActive} setIsActive={setIsActive}/>}/>
       </Route>
     )
   );

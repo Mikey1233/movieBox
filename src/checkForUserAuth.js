@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { auth } from './config/firebaseConfig';
 import { onAuthStateChanged } from "firebase/auth";
 import img from "./assets/image-avatar.svg";

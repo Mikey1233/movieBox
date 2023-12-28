@@ -1,4 +1,4 @@
-.movieBox-all-recommend {
+/* .movieBox-all-recommend {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -11,3 +11,8 @@
     gap: 20px;
     padding-top: 1rem;
   }
+ @media screen and (max-width:700px){
+.movieBox-all-recommend{
+  justify-content: center;
+}
+  } */
