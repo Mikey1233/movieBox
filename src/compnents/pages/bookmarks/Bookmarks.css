@@ -22,3 +22,8 @@
     margin-bottom: 1rem;
     /* height: 100%; */
 }
+@media screen and (max-width:700px){
+ .bookmark-set{
+    justify-content: center;
+ }    
+}

@@ -54,24 +54,24 @@ a.active svg {
   .root-layouts {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 70px;
-    height: fit-content;
+    height: 100vh;
     position: relative;
   }
 
   .root-layouts main {
     grid-column: unset;
-    grid-row: 1/2;
     width: 100%;
     overflow-x: scroll;
   }
 
   .root-layouts nav {
+    grid-row: 2/3;
+
     left: 0;
     background-color: #000;
     border-radius: 10px 10px 0 0;
     z-index: 100;
     position: fixed;
-    top: 90vh;
     width: 100%;
     padding: 0.9rem;
     margin-left: unset;

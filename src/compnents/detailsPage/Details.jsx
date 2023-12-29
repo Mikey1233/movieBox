@@ -4,18 +4,14 @@ import { Link, useParams } from "react-router-dom";
 import "./Details.css";
 //////firebase
 import { db, auth } from "../../config/firebaseConfig";
-import {
-  collection,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
-import { fetchfunc ,checkUserData} from "./fetchfunc";
+import { collection, deleteDoc, doc } from "firebase/firestore";
+import { fetchfunc, checkUserData } from "./fetchfunc";
 /////////popup animation component
-import Popup from '../popup/Popup';
+import Popup from "../popup/Popup";
 
 function Details({ bookmark, setBookmark }) {
   //////took the state as parameters from app.js to manage the popup animation when movie is bookmarked
-// const moviesRef = collection(db, "moviesBookmarked");
+  // const moviesRef = collection(db, "moviesBookmarked");
 
   const moviesRef = collection(db, "moviesBookmarked");
   // const userIdToFetch = auth?.currentUser?.uid;
@@ -46,68 +42,41 @@ function Details({ bookmark, setBookmark }) {
       }
     };
     fetchMovieDetails();
-    fetchfunc(id,setBookmarkData,setIsbookmarked);
+    fetchfunc(id, setBookmarkData, setIsbookmarked);
   }, [id]);
 
   if (loading) {
     return <p>Loading...</p>;
   }
 
-
-
-//////////////add movies to bookmarks
-  // const addBookmark = async () => {
-  //   try {
-  //     await addDoc(moviesRef, {
-  //       image_path: movieDetails.poster_path,
-  //       release_date: movieDetails.release_date,
-  //       title: movieDetails.title,
-  //       type: "movie",
-  //       userId: auth?.currentUser?.uid,
-  //       movieId: id,
-  //     });
-  //     setBookmark(true);
-  //     setIsbookmarked(true)
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-  
-  ///////////remove movie from bookmark
   const removeItemFromBookmark = async (code) => {
     await deleteDoc(doc(db, "moviesBookmarked", code));
-      const rexs = await doc(db, "moviesBookmarked", code)
-      
-    setIsbookmarked(false)
+    const rexs = await doc(db, "moviesBookmarked", code);
+
+    setIsbookmarked(false);
   };
   return (
     <div className="movie-details">
-    <Popup message={'added successfully'} bookmark={bookmark} setBookmark={setBookmark}/>
-      <div
-        className="movie-details-img"
-      >
-        <div>
-          <img
-            src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
-            alt={movieDetails.title}
-          />
-        </div>
-      </div>
-
+      <Popup
+        message={"added successfully"}
+        bookmark={bookmark}
+        setBookmark={setBookmark}
+      />
       <div className="movie-details-content">
-        <h1>{movieDetails.title}</h1>
-        <p>
-          <span className="color-text">About : </span> <br />
-          {movieDetails.overview}
+        <p style={{color:'red'}}>
+        {movieDetails.genres.length > 1
+          ? movieDetails?.genres.map((genre) => genre.name).join(", ")
+          : ""}
         </p>
+        
+
+        <h1>{movieDetails.title}</h1>
+        <p>{movieDetails.overview}</p>
         <p>
           <span className="color-text">Release date : </span>{" "}
           {movieDetails.release_date}
         </p>
-        <p>
-          <span className="color-text">Genres : </span>{" "}
-          {/* {movieDetails.genres.length > 1 && movieDetails.genres.map((genre) => genre.name).join(", ")} */}
-        </p>
+
         <div>
           <Link to={-1}>
             <button type="button" className="btn home">
@@ -123,10 +92,24 @@ function Details({ bookmark, setBookmark }) {
               remove from Bookmarks
             </button>
           ) : (
-            <button type="button" className="btn home" onClick={()=> checkUserData(id,setBookmark,setIsbookmarked,movieDetails)}>
+            <button
+              type="button"
+              className="btn home"
+              onClick={() =>
+                checkUserData(id, setBookmark, setIsbookmarked, movieDetails)
+              }
+            >
               Add to Bookmarks
             </button>
           )}
+        </div>
+      </div>
+      <div className="movie-details-img">
+        <div>
+          <img
+            src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
+            alt={movieDetails.title}
+          />
         </div>
       </div>
     </div>

@@ -136,6 +136,10 @@
   .movieBox-all-recommend__contents{
     justify-content: center;
   }
+.movieBox-all-recommend__contents{
+  width: 100%;
+}
+
   .movieBox-all-input {
     padding: 5px;
     align-content: center;

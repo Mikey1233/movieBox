@@ -53,7 +53,7 @@ function Bookmarks({ isActive, setIsActive }) {
   }, [isActive]);
   return (
     <div className="bookmark">
-      <h1>Hello {auth?.currentUser?.displayName.split(" ")[0]}</h1>
+      <h1>Hello , {auth?.currentUser?.displayName.split(" ")[0]}</h1>
       <div className="bookmark-set">
         {isActive === false && (
           <div className="no-data-signIn">
