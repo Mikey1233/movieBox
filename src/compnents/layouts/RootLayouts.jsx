@@ -11,7 +11,7 @@ function RootLayouts() {
 
   return (
     <div className="root-layouts">
-      
+      <div className="nav-layout">
       <nav>
         <div className="root-layouts__img">
           <img src={logo} />
@@ -70,6 +70,8 @@ function RootLayouts() {
           <img src={userPic} alt="avatar" className="avatar" />
         </div>
       </nav>
+      </div>
+      
       
      
 

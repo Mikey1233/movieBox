@@ -63,10 +63,12 @@ a.active svg {
     width: 100%;
     overflow-x: scroll;
   }
-
+.nav-layout{
+  grid-row: 2/3;
+  position: relative;
+}
   .root-layouts nav {
-    grid-row: 2/3;
-
+    
     left: 0;
     background-color: #000;
     border-radius: 10px 10px 0 0;
