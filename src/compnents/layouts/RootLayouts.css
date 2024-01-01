@@ -13,9 +13,7 @@
   width: 100%;
   overflow-x: scroll;
 }
-.root-layouts main::-webkit-scrollbar {
-  width: 0;
-}
+
 .root-layouts nav {
   background-color: var(--secondaryBg);
   border-radius: 10px;
@@ -54,8 +52,7 @@ a.active svg {
   .root-layouts {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 70px;
-    max-height: 100vh;
-    height: unset;
+    height:100vh;
   }
 
   .root-layouts main {
