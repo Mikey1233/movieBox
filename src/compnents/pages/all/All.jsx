@@ -79,9 +79,12 @@ const signUserOut = async()=>{
     <div className="movieBox-all">
       <div className="movieBox-intro">
         <div className="movieBox-all-input">
-          <div>
-            <input type="text" placeholder="Search for movie or Tv-series" ></input>
+          <div className="in">
+            <input type="text" placeholder="Search for movie" ></input>
+            <div className="search-contd">
             {search}
+
+            </div>
           </div>
           <div>
             {isActive ? (

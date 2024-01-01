@@ -32,31 +32,24 @@ const TvDet = () => {
 
   return (
     <div className="tv-det">
-      <div className="tv-det-img">
-        <img
-          src={`https://image.tmdb.org/t/p/w500${tvSeriesDetails.poster_path}`}
-          alt={tvSeriesDetails.name}
-        />
-      </div>
-
       <div className="tv-det-content">
+      <p style={{color:'red'}}>
+          {/* <span className="color-text">Genres : </span>{" "} */}
+          {tvSeriesDetails.genres.map((genre) => genre.name).join(", ")}
+        </p>
         <h1>{tvSeriesDetails.name}</h1>
         <p>
-          <span className="color-text">About : </span> <br />
           {tvSeriesDetails.overview}
         </p>
         <p>
-          <span className="color-text">First air date : </span>{" "}
+          <span>First air date : </span>{" "}
           {tvSeriesDetails.first_air_date}
         </p>
         <p>
-          <span className="color-text">Number of seasons : </span>
+          <span >Number of seasons : </span>
           {tvSeriesDetails.number_of_seasons}
         </p>
-        <p>
-          <span className="color-text">Genres : </span>{" "}
-          {tvSeriesDetails.genres.map((genre) => genre.name).join(", ")}
-        </p>
+       
         <div>
           <Link to={-1}>
             <button type="button" className="btn home">
@@ -67,6 +60,12 @@ const TvDet = () => {
             Add to Bookmarks
           </button>
         </div>
+      </div>
+      <div className="tv-det-img">
+        <img
+          src={`https://image.tmdb.org/t/p/w500${tvSeriesDetails.poster_path}`}
+          alt={tvSeriesDetails.name}
+        />
       </div>
     </div>
   );

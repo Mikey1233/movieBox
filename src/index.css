@@ -21,3 +21,26 @@ a{
 a.active{
   font-weight: bold;
 }
+.btn{
+    text-align: center;
+    margin-right: 1.2rem;
+    justify-content: center;
+    padding: 10px 15px ;
+    border-radius: 50px;
+    outline: none;
+    border: 0;
+    font-weight:bold;
+    cursor: pointer;
+    color: white;
+    background-color: red;
+    transition: all .4s;
+}
+.btn:hover{
+    background-color: rgba(255, 0, 0, 0.318);
+}
+@media screen and (max-width:500px){
+  .btn{
+    margin-top: 12px;
+    margin-right: 7px;
+  }
+}
