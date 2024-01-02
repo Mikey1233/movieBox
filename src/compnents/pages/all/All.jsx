@@ -56,12 +56,15 @@ const signUserOut = async()=>{
   }
  
 }
+//////////getting the screen state
+const [screen,setScreen] = useState(window.innerWidth)
+console.log(screen)
   const sliderRef = useRef(null);
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: screen < 701 ? 1 : 4,
     slidesToScroll: 1,
   };
   
@@ -118,7 +121,7 @@ const signUserOut = async()=>{
           className="movieBox-all__trending"
         >
           {trending.map((arr) => (
-            <Link to={`${arr.id}`} key={arr.id}>
+            <Link to={arr.media_type === 'tv'?`tv-series/${arr.id}`:`${arr.id}`} key={arr.id}>
               <MovieBox
                 title={arr.title || arr.name}
                 year={
@@ -135,7 +138,7 @@ const signUserOut = async()=>{
           <h2>Recommended for you</h2>
           <div className="movieBox-all-recommend__contents">
             {recommend.map((arr) => (
-              <Link to={`${arr.id}`} key={arr.id}>
+              <Link to={arr.media_type === 'tv'?`tv-series/${arr.id}`:`${arr.id}`} key={arr.id}>
                 <MovieCont
                   title={arr.title || arr.name}
                   year={
@@ -153,7 +156,7 @@ const signUserOut = async()=>{
           <h2>Top Rated</h2>
           <div className="movieBox-all-recommend__contents">
             {popular.map((arr) => (
-              <Link to={`${arr.id}`} key={arr.id}>
+              <Link to={arr.media_type === 'tv'?`tv-series/${arr.id}`:`${arr.id}`} key={arr.id}>
                 <MovieCont
                   title={arr.title || arr.name}
                   year={
@@ -171,7 +174,7 @@ const signUserOut = async()=>{
           <h2>Upcoming</h2>
           <div className="movieBox-all-recommend__contents">
             {upcoming.map((arr) => (
-              <Link to={`${arr.id}`} key={arr.id}>
+              <Link to={arr.media_type === 'tv'?`tv-series/${arr.id}`:`${arr.id}`} key={arr.id}>
                 <MovieCont
                   title={arr.title || arr.name}
                   year={

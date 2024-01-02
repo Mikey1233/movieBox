@@ -17,28 +17,53 @@ import MovieLay from "./compnents/layouts/movieLayout/MovieLay";
 import TvLayout from "./compnents/layouts/tvLayout/TvLayout";
 import TvDet from "./compnents/tvDetails/TvDet";
 import { useState } from "react";
+import Booklayout from "./compnents/layouts/bookmarkLayout/Booklayout";
 // import TvLayout from "./compnents/layouts/tvLayout/TvLayout";
 
-
 function App() {
-const [bookmark,setBookmark] = useState(false);
-const [isActive, setIsActive] = useState(false);
+  const [bookmark, setBookmark] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
-  
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<RootLayouts/>}>
-        <Route index loader={loaderData} element={<All isActive={isActive} setIsActive={setIsActive}/>} />
-        <Route path=":id" element={<Details bookmark={bookmark} setBookmark={setBookmark}/>} />
+      <Route path="/" element={<RootLayouts />}>
+        <Route index loader={loaderData} element={<All isActive={isActive} setIsActive={setIsActive} />}/>
+        <Route path=":id" element={<Details bookmark={bookmark} setBookmark={setBookmark} />}/>
+        <Route path="/tv-series/:id" element={<TvDet bookmark={bookmark} setBookmark={setBookmark} />}/>
+
         <Route path="movies" element={<MovieLay />}>
           <Route index element={<Movies />} />
-          <Route path=":id" element={<Details bookmark={bookmark} setBookmark={bookmark} />} />
+          <Route
+            path=":id"
+            element={<Details bookmark={bookmark} setBookmark={setBookmark} />}
+          />
         </Route>
+
         <Route path="/tv-series" element={<TvLayout />}>
-          <Route index element={<Tvseries/>}/>
-            <Route path=":id" element={<TvDet/>}/>
+          <Route index element={<Tvseries />} />
+          <Route
+            path=":id"
+            element={<TvDet bookmark={bookmark} setBookmark={setBookmark} />}
+          />
         </Route>
-        <Route path="book-marks" element={<Bookmarks isActive={isActive} setIsActive={setIsActive}/>}/>
+
+        <Route path="book-marks" element={<Booklayout />}>
+          <Route
+            index
+            element={
+              <Bookmarks isActive={isActive} setIsActive={setIsActive} />
+            }
+          />
+          <Route
+            path=":id"
+            element={<Details bookmark={bookmark} setBookmark={bookmark} />}
+          />
+
+          <Route
+            path="tv/:id"
+            element={<TvDet bookmark={bookmark} setBookmark={setBookmark} />}
+          />
+        </Route>
       </Route>
     )
   );

@@ -5,7 +5,7 @@ import "./Details.css";
 //////firebase
 import { db, auth } from "../../config/firebaseConfig";
 import { collection, deleteDoc, doc } from "firebase/firestore";
-import { fetchfunc, checkUserData } from "./fetchfunc";
+import { fetchfunc, checkUserData } from "../fetchfunc";
 /////////popup animation component
 import Popup from "../popup/Popup";
 
@@ -51,7 +51,7 @@ function Details({ bookmark, setBookmark }) {
 
   const removeItemFromBookmark = async (code) => {
     await deleteDoc(doc(db, "moviesBookmarked", code));
-    const rexs = await doc(db, "moviesBookmarked", code);
+    // const rexs = await doc(db, "moviesBookmarked", code);
 
     setIsbookmarked(false);
   };

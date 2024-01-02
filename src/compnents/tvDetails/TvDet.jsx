@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import "./TvDet.css";
+////firebase
+import { db,auth } from "../../config/firebaseConfig";
+import { collection, deleteDoc, doc } from "firebase/firestore";
+import { fetchfunc, checkUserData } from "../fetchfunc";
+/////////popup animation component
+import Popup from "../popup/Popup";
 
-const TvDet = () => {
+
+const TvDet = ({ bookmark, setBookmark }) => {
   const { id } = useParams();
   const [tvSeriesDetails, setTvSeriesDetails] = useState({});
   const [loading, setLoading] = useState(true);
-
+  const moviesRef = collection(db, "moviesBookmarked");
+  ////////all states
+  const [img, setImage] = useState(null);
+  const [isBookmarked, setIsbookmarked] = useState(false);
+  const [bookmarkData, setBookmarkData] = useState([]);
   useEffect(() => {
     const fetchTvSeriesDetails = async () => {
       try {
@@ -17,6 +28,8 @@ const TvDet = () => {
         const data = await response.json();
         setTvSeriesDetails(data);
         setLoading(false);
+        setImage(tvSeriesDetails.poster_path);
+
       } catch (error) {
         console.error(error);
         setLoading(false);
@@ -24,17 +37,27 @@ const TvDet = () => {
     };
 
     fetchTvSeriesDetails();
+    fetchfunc(id, setBookmarkData, setIsbookmarked);
   }, [id]);
+  const removeItemFromBookmark = async (code) => {
+    await deleteDoc(doc(db, "moviesBookmarked", code));
+    // const rexs = await doc(db, "moviesBookmarked", code);
 
+    setIsbookmarked(false);
+  };
   if (loading) {
     return <p>Loading...</p>;
   }
 
   return (
     <div className="tv-det">
+        <Popup
+        message={"added successfully"}
+        bookmark={bookmark}
+        setBookmark={setBookmark}
+      />
       <div className="tv-det-content">
       <p style={{color:'red'}}>
-          {/* <span className="color-text">Genres : </span>{" "} */}
           {tvSeriesDetails.genres.map((genre) => genre.name).join(", ")}
         </p>
         <h1>{tvSeriesDetails.name}</h1>
@@ -56,9 +79,28 @@ const TvDet = () => {
               Back
             </button>
           </Link>
-          <button type="button" className="btn home">
+          {isBookmarked ? (
+            <button
+              type="button"
+              className="btn home"
+              onClick={() => removeItemFromBookmark(bookmarkData[0]?.id)}
+            >
+              remove from Bookmarks
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn home"
+              onClick={() =>
+                checkUserData(id, setBookmark, setIsbookmarked,tvSeriesDetails)
+              }
+            >
+              Add to Bookmarks
+            </button>
+          )}
+          {/* <button type="button" className="btn home">
             Add to Bookmarks
-          </button>
+          </button> */}
         </div>
       </div>
       <div className="tv-det-img">

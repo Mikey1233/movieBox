@@ -26,4 +26,13 @@
  .bookmark-set{
     justify-content: center;
  }    
+ .no-data, .no-data-signIn{
+    padding-top: 1rem;
+    align-items: center;
+}
+ .no-data div img,.no-data-signIn img{
+    width: 98%;
+    margin-bottom: 1rem;
+    /* height: 100%; */
+}
 }
