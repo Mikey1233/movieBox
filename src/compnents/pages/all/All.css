@@ -125,6 +125,7 @@
 .movieBox-all-recommend {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 15px;
   padding-top: 2rem;
 }
@@ -133,18 +134,18 @@
   flex-wrap: wrap;
   height: fit-content;
   gap: 20px;
+  justify-content: center;
   padding-top: 1rem;
 }
 .ff {
   display: flex;
+  justify-content: center;
 }
 @media screen and (max-width:700px){
-  .movieBox-all-recommend__contents{
-    justify-content: center;
+  .movieBox-all-recommend__contents a{
+  display: flex;
+  justify-content: center;
   }
-.movieBox-all-recommend__contents{
-  width: 100%;
-}
 
   .movieBox-all-input {
     padding: 5px;
@@ -158,6 +159,7 @@
   }
   .movieBox-all-input div button {
     margin-top: unset;
+    height: 45px;
   }
   .movieBox-all-input input {
     padding: 7px 12px;

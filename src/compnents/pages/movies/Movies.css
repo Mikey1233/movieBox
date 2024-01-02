@@ -10,4 +10,8 @@
   .movie-content{
     justify-content: center;
   }
+  .movie-content a{
+      display: flex;
+      justify-content: center;
+  }
 }
