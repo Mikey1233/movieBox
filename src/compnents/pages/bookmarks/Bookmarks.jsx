@@ -60,7 +60,7 @@ function Bookmarks({ isActive, setIsActive }) {
       <div className="bookmark-set">
         {isActive === false && (
           <div className="no-data-signIn">
-            <div>
+            <div style={{margin: '0 3rem'}}>
               <img src={signup} alt="empty-svg" />
               <p>signin to check the movies you've added</p>
               <span
@@ -74,7 +74,7 @@ function Bookmarks({ isActive, setIsActive }) {
         )}
         {isempty ? (
           <div className="no-data">
-            <div>
+            <div style={{margin: '0 3rem'}}>
               <img src={empty} alt="empty-svg" />
               <p>you bookmark is empty</p>
             </div>
