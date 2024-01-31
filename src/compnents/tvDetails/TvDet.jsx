@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import "./TvDet.css";
 ////firebase
-import { db,auth } from "../../config/firebaseConfig";
+import { db, auth } from "../../config/firebaseConfig";
 import { collection, deleteDoc, doc } from "firebase/firestore";
 import { fetchfunc, checkUserData } from "../fetchfunc";
 /////////popup animation component
 import Popup from "../popup/Popup";
-
+/////////////loader
+import Loader from "../loader/Loader";
 
 const TvDet = ({ bookmark, setBookmark }) => {
   const { id } = useParams();
@@ -29,7 +30,6 @@ const TvDet = ({ bookmark, setBookmark }) => {
         setTvSeriesDetails(data);
         setLoading(false);
         setImage(tvSeriesDetails.poster_path);
-
       } catch (error) {
         console.error(error);
         setLoading(false);
@@ -46,33 +46,34 @@ const TvDet = ({ bookmark, setBookmark }) => {
     setIsbookmarked(false);
   };
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      
+        <Loader />
+      
+    );
   }
 
   return (
     <div className="tv-det">
-        <Popup
+      <Popup
         message={"added successfully"}
         bookmark={bookmark}
         setBookmark={setBookmark}
       />
       <div className="tv-det-content">
-      <p style={{color:'red'}}>
+        <p style={{ color: "red" }}>
           {tvSeriesDetails.genres.map((genre) => genre.name).join(", ")}
         </p>
         <h1>{tvSeriesDetails.name}</h1>
+        <p>{tvSeriesDetails.overview}</p>
         <p>
-          {tvSeriesDetails.overview}
+          <span>First air date : </span> {tvSeriesDetails.first_air_date}
         </p>
         <p>
-          <span>First air date : </span>{" "}
-          {tvSeriesDetails.first_air_date}
-        </p>
-        <p>
-          <span >Number of seasons : </span>
+          <span>Number of seasons : </span>
           {tvSeriesDetails.number_of_seasons}
         </p>
-       
+
         <div>
           <Link to={-1}>
             <button type="button" className="btn home">
@@ -92,7 +93,7 @@ const TvDet = ({ bookmark, setBookmark }) => {
               type="button"
               className="btn home"
               onClick={() =>
-                checkUserData(id, setBookmark, setIsbookmarked,tvSeriesDetails)
+                checkUserData(id, setBookmark, setIsbookmarked, tvSeriesDetails)
               }
             >
               Add to Bookmarks

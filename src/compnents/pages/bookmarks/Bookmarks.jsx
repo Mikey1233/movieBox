@@ -7,11 +7,14 @@ import empty from "../../../assets/empty.svg";
 import signup from "../../../assets/signUp.svg";
 import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { Link } from "react-router-dom";
+import Loader from "../../loader/Loader";
 
 function Bookmarks({ isActive, setIsActive }) {
   const userIdToFetch = auth?.currentUser?.uid;
   const [data, setData] = useState([]);
   const [isempty, setIsempty] = useState(false); 
+  const [loading, setLoading] = useState(true);
+
   /////////////to manage the key props
   let count = 0
   const fetchDataFromFireStore = async () => {
@@ -24,6 +27,7 @@ function Bookmarks({ isActive, setIsActive }) {
       const fetchedData = await querySnapshot.docs.map((doc) => doc.data());
       setData(fetchedData);
       fetchedData.length === 0 ? setIsempty(true) : setIsempty(false);
+      setLoading(false)
     } catch (err) {
       console.log(err);
     }
@@ -54,6 +58,11 @@ function Bookmarks({ isActive, setIsActive }) {
     return () => unsubscribe(); // Cleanup when component unmounts
   }, [isActive]);
   
+  if(loading){
+    return (
+      <Loader/>
+    )
+  }
   return (
     <div className="bookmark">
       <h1>Hello , {auth?.currentUser?.displayName.split(" ")[0]}</h1>

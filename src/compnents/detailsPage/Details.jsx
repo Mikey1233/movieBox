@@ -8,6 +8,7 @@ import { collection, deleteDoc, doc } from "firebase/firestore";
 import { fetchfunc, checkUserData } from "../fetchfunc";
 /////////popup animation component
 import Popup from "../popup/Popup";
+import Loader from "../loader/Loader";
 
 function Details({ bookmark, setBookmark }) {
   //////took the state as parameters from app.js to manage the popup animation when movie is bookmarked
@@ -46,7 +47,7 @@ function Details({ bookmark, setBookmark }) {
   }, [id]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loader/>;
   }
 
   const removeItemFromBookmark = async (code) => {

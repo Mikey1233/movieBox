@@ -22,7 +22,7 @@ const search = (
     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
   </svg>
 );
-function All({isActive,setIsActive}) {
+function All({ isActive, setIsActive }) {
   // const [isActive, setIsActive] = useState(false);
   ///checks if users is signed in to updates the state,and determines what kind of button is rendered
   useEffect(() => {
@@ -47,18 +47,17 @@ function All({isActive,setIsActive}) {
       setIsActive(false);
     }
   };
-const signUserOut = async()=>{
-  try{
-    await signOut(auth)
-    setIsActive(false)
-  }catch(err){
- console.log(err)
-  }
- 
-}
-//////////getting the screen state
-const [screen,setScreen] = useState(window.innerWidth)
-console.log(screen)
+  const signUserOut = async () => {
+    try {
+      await signOut(auth);
+      setIsActive(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  //////////getting the screen state
+  const [screen, setScreen] = useState(window.innerWidth);
+  console.log(screen);
   const sliderRef = useRef(null);
   const settings = {
     dots: false,
@@ -67,10 +66,6 @@ console.log(screen)
     slidesToShow: screen < 701 ? 1 : 4,
     slidesToScroll: 1,
   };
-  
-
-
-
 
   ////////////////data
   const data = useLoaderData();
@@ -83,11 +78,8 @@ console.log(screen)
       <div className="movieBox-intro">
         <div className="movieBox-all-input">
           <div className="in">
-            <input type="text" placeholder="Search for movie" ></input>
-            <div className="search-contd">
-            {search}
-
-            </div>
+            <input type="text" placeholder="Search for movie"></input>
+            <div className="search-contd">{search}</div>
           </div>
           <div>
             {isActive ? (
@@ -121,7 +113,10 @@ console.log(screen)
           className="movieBox-all__trending"
         >
           {trending.map((arr) => (
-            <Link to={arr.media_type === 'tv'?`tv-series/${arr.id}`:`${arr.id}`} key={arr.id}>
+            <Link
+              to={arr.media_type === "tv" ? `tv-series/${arr.id}` : `${arr.id}`}
+              key={arr.id}
+            >
               <MovieBox
                 title={arr.title || arr.name}
                 year={
@@ -138,7 +133,12 @@ console.log(screen)
           <h2>Recommended for you</h2>
           <div className="movieBox-all-recommend__contents">
             {recommend.map((arr) => (
-              <Link to={arr.media_type === 'tv'?`tv-series/${arr.id}`:`${arr.id}`} key={arr.id}>
+              <Link
+                to={
+                  arr.media_type === "tv" ? `tv-series/${arr.id}` : `${arr.id}`
+                }
+                key={arr.id}
+              >
                 <MovieCont
                   title={arr.title || arr.name}
                   year={
@@ -156,7 +156,12 @@ console.log(screen)
           <h2>Top Rated</h2>
           <div className="movieBox-all-recommend__contents">
             {popular.map((arr) => (
-              <Link to={arr.media_type === 'tv'?`tv-series/${arr.id}`:`${arr.id}`} key={arr.id}>
+              <Link
+                to={
+                  arr.media_type === "tv" ? `tv-series/${arr.id}` : `${arr.id}`
+                }
+                key={arr.id}
+              >
                 <MovieCont
                   title={arr.title || arr.name}
                   year={
@@ -174,7 +179,12 @@ console.log(screen)
           <h2>Upcoming</h2>
           <div className="movieBox-all-recommend__contents">
             {upcoming.map((arr) => (
-              <Link to={arr.media_type === 'tv'?`tv-series/${arr.id}`:`${arr.id}`} key={arr.id}>
+              <Link
+                to={
+                  arr.media_type === "tv" ? `tv-series/${arr.id}` : `${arr.id}`
+                }
+                key={arr.id}
+              >
                 <MovieCont
                   title={arr.title || arr.name}
                   year={

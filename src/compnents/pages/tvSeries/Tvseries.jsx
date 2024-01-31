@@ -3,18 +3,29 @@ import MovieCont from "../../movieContainer/MovieCont";
 import { useState, useEffect } from "react";
 import "./Tvseries.css";
 import { Link } from "react-router-dom";
+import Loader from "../../loader/Loader";
 function Tvseries() {
   const [tv, setTv] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const apiAddress = `https://api.themoviedb.org/3/discover/tv?api_key=78393d09e7d06dc8a1d807120b3c221e`;
 
   const fetchMovie = async function (url) {
-    const response = await fetch(url);
-    const data = await response.json();
-    setTv(data.results);
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setLoading(false)
+      setTv(data.results);
+    } catch (err) {
+      console.log(err);
+    }
   };
   useEffect(() => {
     fetchMovie(apiAddress);
   }, []);
+  if(loading){
+    return (<Loader/>)
+  }
   return (
     <div>
       <div className="movie-tv">

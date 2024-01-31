@@ -26,4 +26,10 @@
   .popup-container.show {
     opacity: 1;
   }
+  @media screen and (max-width : 700px) {
+    .popup-container{
+      left: 25%;
+      transform: unset
+    }
+  }
   
