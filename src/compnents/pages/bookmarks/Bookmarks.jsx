@@ -53,6 +53,7 @@ function Bookmarks({ isActive, setIsActive }) {
       } else {
         // User is signed out
         setIsActive(false);
+        setLoading(false)
       }
     });
     return () => unsubscribe(); // Cleanup when component unmounts
