@@ -28,6 +28,7 @@ const TvDet = ({ bookmark, setBookmark }) => {
         );
         const data = await response.json();
         setTvSeriesDetails(data);
+        console.log(tvSeriesDetails)
         setLoading(false);
         setImage(tvSeriesDetails.poster_path);
       } catch (error) {

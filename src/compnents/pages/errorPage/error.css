@@ -1,0 +1,20 @@
+.not-found{
+    display: grid;
+    width: 100%;
+    padding: 10px;
+    /* align-content: center; */
+    place-items: center;
+    height: 100vh;
+    text-align: center;
+    /* justify-content: center; */
+}
+.not-found img{
+ width: 40%;
+}
+.not-found  div p{
+    font-size: 13px;
+}
+.not-found div a {
+    text-decoration: underline;
+    cursor: pointer;
+}

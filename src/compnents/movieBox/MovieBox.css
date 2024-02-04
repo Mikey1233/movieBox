@@ -51,9 +51,3 @@
     border-radius: 45%;
 
 } */
-@media screen and (max-width:700px){
-    .movieBox{
-        width: 90%;
-        
-    }
-}

@@ -4,9 +4,12 @@ import { useState, useEffect } from "react";
 import "./Tvseries.css";
 import { Link } from "react-router-dom";
 import Loader from "../../loader/Loader";
+import NetworkErr from "../../networkError/NetworkErr";
 function Tvseries() {
   const [tv, setTv] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [err,setErr] = useState(false)
+
 
   const apiAddress = `https://api.themoviedb.org/3/discover/tv?api_key=78393d09e7d06dc8a1d807120b3c221e`;
 
@@ -18,6 +21,7 @@ function Tvseries() {
       setTv(data.results);
     } catch (err) {
       console.log(err);
+      setErr(true)
     }
   };
   useEffect(() => {
@@ -26,11 +30,14 @@ function Tvseries() {
   if(loading){
     return (<Loader/>)
   }
+  if(err){
+    return <NetworkErr/>
+  }
   return (
     <div>
       <div className="movie-tv">
         {tv.map((arr) => (
-          <Link to={`${arr.id}`} key={arr.id}>
+          <Link to={`b/${arr.id}`} key={arr.id}>
             <MovieCont
               title={arr.title || arr.name}
               year={

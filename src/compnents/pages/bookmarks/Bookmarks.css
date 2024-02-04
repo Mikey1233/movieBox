@@ -7,6 +7,7 @@
     gap: 15px;
     flex-wrap: wrap;
 }
+
 .no-data, .no-data-signIn{
     display: grid;
     justify-content: center;
@@ -24,8 +25,11 @@
 }
 @media screen and (max-width:700px){
  .bookmark-set{
+    display: grid;
     justify-content: center;
+    align-items: center;
  }    
+ 
  .no-data, .no-data-signIn{
     padding-top: 1rem;
     align-items: center;

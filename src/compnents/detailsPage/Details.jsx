@@ -9,6 +9,7 @@ import { fetchfunc, checkUserData } from "../fetchfunc";
 /////////popup animation component
 import Popup from "../popup/Popup";
 import Loader from "../loader/Loader";
+import NetworkErr from "../networkError/NetworkErr";
 
 function Details({ bookmark, setBookmark }) {
   //////took the state as parameters from app.js to manage the popup animation when movie is bookmarked
@@ -19,12 +20,15 @@ function Details({ bookmark, setBookmark }) {
 
   const { id } = useParams();
   ///all states
+  const [err,setErr] = useState(false)
   const [movieDetails, setMovieDetails] = useState([]);
   const [img, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isBookmarked, setIsbookmarked] = useState(false);
   const [bookmarkData, setBookmarkData] = useState([]);
+  
 
+////////////////
   ////fetching single data for the page from firestore
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -37,8 +41,11 @@ function Details({ bookmark, setBookmark }) {
         setMovieDetails(data);
         setLoading(false);
         setImage(movieDetails.poster_path);
+      
+        
       } catch (error) {
         console.error(error);
+        setErr(true)
         setLoading(false);
       }
     };
@@ -46,9 +53,13 @@ function Details({ bookmark, setBookmark }) {
     fetchfunc(id, setBookmarkData, setIsbookmarked);
   }, [id]);
 
+  if(err){
+    return <NetworkErr/>
+  }
   if (loading) {
     return <Loader/>;
   }
+ 
 
   const removeItemFromBookmark = async (code) => {
     await deleteDoc(doc(db, "moviesBookmarked", code));

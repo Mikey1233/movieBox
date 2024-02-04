@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { auth, googleProvider } from "../../../config/firebaseConfig";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import googleSvg from "../../../assets/googleSvg.svg";
+import NetworkErr from "../../networkError/NetworkErr";
 
 const search = (
   <svg
@@ -23,6 +24,8 @@ const search = (
   </svg>
 );
 function All({ isActive, setIsActive }) {
+  const [err,setErr] = useState(false)
+
   // const [isActive, setIsActive] = useState(false);
   ///checks if users is signed in to updates the state,and determines what kind of button is rendered
   useEffect(() => {
@@ -57,7 +60,6 @@ function All({ isActive, setIsActive }) {
   };
   //////////getting the screen state
   const [screen, setScreen] = useState(window.innerWidth);
-  console.log(screen);
   const sliderRef = useRef(null);
   const settings = {
     dots: false,
@@ -69,10 +71,19 @@ function All({ isActive, setIsActive }) {
 
   ////////////////data
   const data = useLoaderData();
-  const trending = data[0].results;
-  const recommend = data[1].results;
-  const popular = data[2].results;
-  const upcoming = data[3].results;
+  if(!data){
+    return <NetworkErr/>
+  }
+  
+  
+    const trending = data[0].results;
+    const recommend = data[1].results;
+    const popular = data[2].results;
+    const upcoming = data[3].results;
+
+ 
+  console.log(data)
+  
   return (
     <div className="movieBox-all">
       <div className="movieBox-intro">
@@ -114,7 +125,7 @@ function All({ isActive, setIsActive }) {
         >
           {trending.map((arr) => (
             <Link
-              to={arr.media_type === "tv" ? `tv-series/${arr.id}` : `${arr.id}`}
+              to={arr.media_type === "tv" ? `tv-series/b/${arr.id}` : `movies/a/${arr.id}`}
               key={arr.id}
             >
               <MovieBox
@@ -134,9 +145,8 @@ function All({ isActive, setIsActive }) {
           <div className="movieBox-all-recommend__contents">
             {recommend.map((arr) => (
               <Link
-                to={
-                  arr.media_type === "tv" ? `tv-series/${arr.id}` : `${arr.id}`
-                }
+              to={arr.media_type === "tv" ? `tv-series/b/${arr.id}` : `movies/a/${arr.id}`}
+                
                 key={arr.id}
               >
                 <MovieCont
@@ -158,7 +168,7 @@ function All({ isActive, setIsActive }) {
             {popular.map((arr) => (
               <Link
                 to={
-                  arr.media_type === "tv" ? `tv-series/${arr.id}` : `${arr.id}`
+                  arr.media_type === "tv" ? `tv-series/b/${arr.id}` : `movies/a/${arr.id}`
                 }
                 key={arr.id}
               >
@@ -181,7 +191,7 @@ function All({ isActive, setIsActive }) {
             {upcoming.map((arr) => (
               <Link
                 to={
-                  arr.media_type === "tv" ? `tv-series/${arr.id}` : `${arr.id}`
+                  arr.media_type === "tv" ? `tv-series/b/${arr.id}` : `movies/a/${arr.id}`
                 }
                 key={arr.id}
               >
@@ -212,20 +222,26 @@ const fetchApiData = async (url, opt) => {
   return data;
 };
 export const loaderData = async () => {
-  const options = {
-    method: "GET",
-  };
-  const dataArr = {
-    0: "https://api.themoviedb.org/3/trending/all/day?api_key=78393d09e7d06dc8a1d807120b3c221e",
-    1: `https://api.themoviedb.org/3/discover/movie?api_key=78393d09e7d06dc8a1d807120b3c221e`,
-    2: "https://api.themoviedb.org/3/movie/top_rated?api_key=78393d09e7d06dc8a1d807120b3c221e",
-    3: "https://api.themoviedb.org/3/movie/upcoming?api_key=78393d09e7d06dc8a1d807120b3c221e",
-  };
-  const response = [];
-  for (let i = 0; i < 4; i++) {
-    response.push(fetchApiData(dataArr[i], options));
-  }
+  try{
+    const options = {
+      method: "GET",
+    };
+    const dataArr = {
+      0: "https://api.themoviedb.org/3/trending/all/day?api_key=78393d09e7d06dc8a1d807120b3c221e",
+      1: `https://api.themoviedb.org/3/discover/movie?api_key=78393d09e7d06dc8a1d807120b3c221e`,
+      2: "https://api.themoviedb.org/3/movie/top_rated?api_key=78393d09e7d06dc8a1d807120b3c221e",
+      3: "https://api.themoviedb.org/3/movie/upcoming?api_key=78393d09e7d06dc8a1d807120b3c221e",
+    };
+    const response = [];
+    for (let i = 0; i < 4; i++) {
+      response.push(fetchApiData(dataArr[i], options));
+    }
   const data = await Promise.all(response);
-
   return data;
+
+  }catch(err){
+    return false
+  }
+ 
+
 };

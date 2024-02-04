@@ -12,11 +12,11 @@ import Loader from "../../loader/Loader";
 function Bookmarks({ isActive, setIsActive }) {
   const userIdToFetch = auth?.currentUser?.uid;
   const [data, setData] = useState([]);
-  const [isempty, setIsempty] = useState(false); 
+  const [isempty, setIsempty] = useState(false);
   const [loading, setLoading] = useState(true);
 
   /////////////to manage the key props
-  let count = 0
+  let count = 0;
   const fetchDataFromFireStore = async () => {
     try {
       const q = await query(
@@ -27,7 +27,7 @@ function Bookmarks({ isActive, setIsActive }) {
       const fetchedData = await querySnapshot.docs.map((doc) => doc.data());
       setData(fetchedData);
       fetchedData.length === 0 ? setIsempty(true) : setIsempty(false);
-      setLoading(false)
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -44,25 +44,22 @@ function Bookmarks({ isActive, setIsActive }) {
     fetchDataFromFireStore();
   }, []);
   useEffect(() => {
- 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         //user is signed in
-        fetchDataFromFireStore()
+        fetchDataFromFireStore();
         setIsActive(true);
       } else {
         // User is signed out
         setIsActive(false);
-        setLoading(false)
+        setLoading(false);
       }
     });
     return () => unsubscribe(); // Cleanup when component unmounts
   }, [isActive]);
-  
-  if(loading){
-    return (
-      <Loader/>
-    )
+
+  if (loading) {
+    return <Loader />;
   }
   return (
     <div className="bookmark">
@@ -70,7 +67,7 @@ function Bookmarks({ isActive, setIsActive }) {
       <div className="bookmark-set">
         {isActive === false && (
           <div className="no-data-signIn">
-            <div style={{margin: '0 3rem'}}>
+            <div style={{ margin: "0 3rem" }}>
               <img src={signup} alt="empty-svg" />
               <p>signin to check the movies you've added</p>
               <span
@@ -84,25 +81,26 @@ function Bookmarks({ isActive, setIsActive }) {
         )}
         {isempty ? (
           <div className="no-data">
-            <div style={{margin: '0 3rem'}}>
+            <div style={{ margin: "0 3rem" }}>
               <img src={empty} alt="empty-svg" />
               <p>you bookmark is empty</p>
             </div>
           </div>
         ) : (
           data.map((elem) => (
-            
-            <Link to={`${elem.type === 'movie'? elem.movieId:`tv/${elem.movieId}`}`}>
-            
-            <MovieBox
-              title={elem.title}
-              year={elem.release_date}
-              type={ elem.type === 'movie'? "movie":"tv"}
-              image={elem.image_path}
-              key={count++}
-            />
+            <Link
+              to={`${
+                elem.type === "movie" ? `movie/${elem.movieId}` : `tv/${elem.movieId}`
+              }`}
+              key={elem.movieId}
+            >
+              <MovieBox
+                title={elem.title}
+                year={elem.release_date}
+                type={elem.type === "movie" ? "movie" : "tv"}
+                image={elem.image_path}
+              />
             </Link>
-            
           ))
         )}
       </div>
