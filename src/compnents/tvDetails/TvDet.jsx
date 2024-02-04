@@ -9,10 +9,13 @@ import { fetchfunc, checkUserData } from "../fetchfunc";
 import Popup from "../popup/Popup";
 /////////////loader
 import Loader from "../loader/Loader";
+import NetworkErr from "../networkError/NetworkErr";
 
 const TvDet = ({ bookmark, setBookmark }) => {
   const { id } = useParams();
   const [tvSeriesDetails, setTvSeriesDetails] = useState({});
+  const [err,setErr] = useState(false)
+
   const [loading, setLoading] = useState(true);
   const moviesRef = collection(db, "moviesBookmarked");
   ////////all states
@@ -33,6 +36,7 @@ const TvDet = ({ bookmark, setBookmark }) => {
         setImage(tvSeriesDetails.poster_path);
       } catch (error) {
         console.error(error);
+        setErr(true)
         setLoading(false);
       }
     };
@@ -46,6 +50,9 @@ const TvDet = ({ bookmark, setBookmark }) => {
 
     setIsbookmarked(false);
   };
+  if(err){
+    return <NetworkErr/>
+  }
   if (loading) {
     return (
       

@@ -8,15 +8,17 @@ import signup from "../../../assets/signUp.svg";
 import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { Link } from "react-router-dom";
 import Loader from "../../loader/Loader";
+import NetworkErr from "../../networkError/NetworkErr";
 
 function Bookmarks({ isActive, setIsActive }) {
   const userIdToFetch = auth?.currentUser?.uid;
+  const [err,setErr] = useState(false)
   const [data, setData] = useState([]);
   const [isempty, setIsempty] = useState(false);
   const [loading, setLoading] = useState(true);
 
   /////////////to manage the key props
-  let count = 0;
+  
   const fetchDataFromFireStore = async () => {
     try {
       const q = await query(
@@ -30,6 +32,7 @@ function Bookmarks({ isActive, setIsActive }) {
       setLoading(false);
     } catch (err) {
       console.log(err);
+      setErr(true)
     }
   };
   const signUserIn = async () => {
@@ -57,7 +60,9 @@ function Bookmarks({ isActive, setIsActive }) {
     });
     return () => unsubscribe(); // Cleanup when component unmounts
   }, [isActive]);
-
+ if(err){
+  return <NetworkErr/>
+ }
   if (loading) {
     return <Loader />;
   }
